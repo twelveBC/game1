@@ -12,14 +12,6 @@ class Setting {
     return this._bot;
   }
 
-  setBot(bot){
-    this._bot = bot;
-  }
-
-  getBot(){
-    return this._bot;
-  }
-
   #isRandom() {
     let bot = ['paper', 'rock', 'scissors'];
     return bot[Math.floor(Math.random() * bot.length)]; 
@@ -31,7 +23,6 @@ class Setting {
 
   #isRule() {
     let player = this.player;
-    this.getBot();
     let botPick = this._bot;
 
     if(
@@ -84,8 +75,8 @@ function gameStart(props) {
   props.target.id === "paper") {
       document.getElementById(props.target.id).classList.toggle("activePick");
       game.player = props.target.id;
-      game.setBot(game.getIsRandom());
-      document.getElementById(`com${game.getBot()}`).classList.add("activePick");
+      game.bot = game.getIsRandom();
+      document.getElementById(`com${game.bot}`).classList.add("activePick");
       document.getElementById(game.getIsRule()).style.visibility = "visible";
       document.getElementById("vs").style.visibility = "hidden";
       game.matchResult();
@@ -104,7 +95,7 @@ function resetGame(){
   document.getElementById("myId").removeEventListener("click",pleaseReset);
   document.getElementById("myId").addEventListener("click",gameStart);
   document.getElementById(game.player).classList.remove("activePick");
-  document.getElementById(`com${game.getBot()}`).classList.remove("activePick");
+  document.getElementById(`com${game.bot}`).classList.remove("activePick");
   document.getElementById(game.getIsRule()).style.visibility = "hidden";
   document.getElementById("vs").style.visibility = "visible";
 }
